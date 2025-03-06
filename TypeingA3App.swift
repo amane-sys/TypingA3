@@ -11,7 +11,7 @@ import SwiftUI
 struct TypeingA3App: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SetGameView(setGameTable: SetGameTable())
         }
     }
 }
