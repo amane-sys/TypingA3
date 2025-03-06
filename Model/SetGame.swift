@@ -14,13 +14,17 @@ struct SetGame {
     
     init() {
         cards = []
-        let contentColor: Array<Color> = [.red, .yellow, .blue] // ????
         var id = 0
         for shape in Content.Shape.allCases {
-            for color in contentColor {
+            for color in Content.ContentColor.allCases {
                 for number in Content.NumberOfShape.allCases {
                     for shade in Content.Shading.allCases {
-                        let content = Content(shape: shape, color: color, number: number, shade: shade)
+                        let content = Content(
+                            shape: shape,
+                            color: color,
+                            number: number,
+                            shade: shade
+                        )
                         cards.append(Card(id: String(id), content: content))
                         id += 1
                     }
@@ -128,7 +132,7 @@ struct SetGame {
 }
 struct Content: Equatable {
     private(set) var shape: Shape
-    private(set) var color: Color
+    private(set) var color: ContentColor
     private(set) var number: NumberOfShape
     private(set) var shade: Shading
     

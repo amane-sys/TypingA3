@@ -23,7 +23,7 @@ struct CardView: View {
                     } else if setGameTable.getSetStatus() == 3 {
                         base.strokeBorder(Color.red, lineWidth: 3)
                     } else {
-                        base.strokeBorder(Color.mint, lineWidth: 3)
+                        base.strokeBorder(Color.mint, lineWidth: 5)
                     }
                     
                 } else {
@@ -61,23 +61,34 @@ struct CardView: View {
         .padding(10)
     }
     
+    var color: Color {
+        switch card.content.color {
+        case .red:
+            return .red
+        case .blue:
+            return .blue
+        case .yellow:
+            return .yellow
+        }
+    }
+    
     @ViewBuilder
     func applyShading(to shape: some Shape) -> some View {
         switch card.content.shade {
         case .solid:
             shape
-                .fill(card.content.color)
+                .fill(color)
                 .minimumScaleFactor(0.1)
                 .aspectRatio(2, contentMode: .fit)
         case .striped:
             shape
-                .foregroundColor(card.content.color.opacity(0.5))
-                .overlay(shape.stroke(card.content.color, lineWidth: 3))
+                .foregroundColor(color.opacity(0.5))
+                .overlay(shape.stroke(color, lineWidth: 3))
                 .minimumScaleFactor(0.1)
                 .aspectRatio(2, contentMode: .fit)
         case .open:
             shape
-                .stroke(card.content.color, lineWidth: 3)
+                .stroke(color, lineWidth: 3)
                 .foregroundColor(.white)
                 .aspectRatio(2, contentMode: .fit)
         }
