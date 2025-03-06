@@ -75,11 +75,10 @@ struct SetGame {
         if checkCardMatching(cards: selectedCards) {
             removeMatchingSet()
         } else {
-            for selected in selectedCards {
-                for (index, element) in cards.enumerated() {
-                    if element.id == selected.id {
-                        cards[index].isSelected = false
-                    }
+            let selectedIds = Set(selectedCards.map { $0.id })
+            for index in cards.indices {
+                if selectedIds.contains(cards[index].id) {
+                    cards[index].isSelected = false
                 }
             }
         }
