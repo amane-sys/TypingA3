@@ -11,6 +11,7 @@ struct SetGame {
     private(set) var cards: Array<Card>
     private(set) var selectedCards: Array<Card> = []
     private(set) var setStatus = 1
+    private(set) var discard: Array<Card> = []
     
     init() {
         cards = []
@@ -92,6 +93,7 @@ struct SetGame {
                 for (index, element) in cards.enumerated() {
                     if element.id == selected.id {
                         cards.remove(at: index)
+                        discard.append(selected)
                     }
                 }
             }
@@ -99,6 +101,8 @@ struct SetGame {
             setSetStatus()
         }
     }
+    
+    
     
     private func checkCardMatching(cards: Array<Card>) -> Bool {
         return checkProperties(
